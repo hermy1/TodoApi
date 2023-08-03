@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    command: sh -c "uvicorn main:app --reload --port=4000 --host=0.0.0.0"
+    env_file:
+      - .env
+    ports:
+      - "4000:4000"
+    volumes:
+      - .:/app
+    networks:
+      - fast-network
+
+  db:
+    image: mysql:latest
+    environment:
+      - MYSQL_DATABASE=todolist
+      - MYSQL_USER=todo
+      - MYSQL_PASSWORD=secret
+      - MYSQL_ROOT_PASSWORD=root_secret
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - fast-network
+volumes:
+  mysql_data:
+networks:
+  fast-network:
+    driver: bridge
+
+
+
+
