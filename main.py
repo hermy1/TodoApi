@@ -5,8 +5,7 @@ from os import environ as env
 app = FastAPI()
 
 #db connection
-# app.py (continued)
-DATABASE_URL = "mysql+mysqlconnector://todo:secret@db/todolist"
+DATABASE_URL = "mysql+mysqlconnector://username:password@db/db_name"
 
 
 @app.get('/')
